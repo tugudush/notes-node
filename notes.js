@@ -3,11 +3,9 @@ console.log('Starting notes.js');
 
 const fs = require('fs');
 
-module.exports.addNote = function(username, age) {
+module.exports.addNote = function(username, age, filename) {
     console.log('addNote');
-
-    var filename = 'greetings.txt';
-
+    
     var string =  `Hi ${username}! You are ${age}.`;
 
     fs.appendFile(filename, string, function(err) {
