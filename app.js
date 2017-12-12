@@ -1,29 +1,35 @@
 console.log('Starting app.js');
 
 const fs = require('fs');
-const os = require('os');
 const _ = require('lodash');
 const notes = require('./notes.js');
 
-var user = os.userInfo();
-var age = 29;
-var filename = 'greetings.txt';
-//var test_string = 5;
+var args = process.argv;
+console.log(args);
 
-//console.log('test_string: ' + test_string);
-//console.log('isString: ' + _.isString(test_string));
+var command = process.argv[2];
 
-//var string = `Hello ${user.username}! You are ${notes.age}.`+"\r\n";
+command_display = null;
 
-var res = notes.addNote(user.username, age, filename);
-console.log(res);
+switch (command) {
+  case 'add':
+    command_display = 'Adding note!';
+    break;
 
-//console.log(user);
+  case 'list':
+    command_display = "Listing notes!";
+    break;
 
-/*
-fs.appendFile(filename, string, function(err) {
-    if(err) {
-        console.log('Unable to write to file.');
-    } // end of if(err)
-}); // end of fs.appendFile('greetings.txt', 'Hello world!', function(err)
-*/
+  case 'read':
+    command_display = "Reading note!";
+    break;
+
+  case 'remove':
+    command_display = "Removing note!";
+    break;
+
+  default:
+    command_display = 'Unknown or empty';
+}
+
+console.log('command: ' + command_display);
