@@ -1,31 +1,41 @@
 console.log('Starting app.js');
 
-const fs = require('fs');
 const _ = require('lodash');
+const yargs = require('yargs');
 const notes = require('./notes.js');
 
-var args = process.argv;
-console.log(args);
+const argv = yargs.argv;
+
+//console.log('Process: ', process.argv);
+//console.log('Yargs: ', argv);
 
 var command = process.argv[2];
+var title = argv.title;
+var body = argv.body;
+// console.log('title: ', title);
+// console.log('body: ', body);
 
 command_display = null;
 
 switch (command) {
   case 'add':
-    command_display = 'Adding note!';
+    command_display = 'add';
+    notes.addNote(title, body)
     break;
 
   case 'list':
-    command_display = "Listing notes!";
+    command_display = "list";
+    notes.getAll();
     break;
 
   case 'read':
-    command_display = "Reading note!";
+    command_display = "read";
+    notes.getNote(title, body);
     break;
 
   case 'remove':
-    command_display = "Removing note!";
+    command_display = "remove";
+    notes.removeNote(title);
     break;
 
   default:
